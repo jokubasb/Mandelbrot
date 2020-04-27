@@ -7,24 +7,31 @@ import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
 
-public class Mandelbrot extends JFrame {
+public class Mandelbrot {
 
-    private final int MAX_ITER = 10000;
+    private int MAX_ITER;
     private final double ZOOM = 3000;
     private BufferedImage I;
     private double zx, zy, cX, cY, tmp;
     public int thread;
+    public int width;
+    public int height;
 
     int threadCount;
 
 
-    public Mandelbrot(int threadCount) throws Exception{
+    public Mandelbrot(int threadCount, int iter) throws Exception{
         //super("Mandelbrot Set");
         this.threadCount = threadCount;
-        setBounds(100, 100, 1000, 1000);
+        //setBounds(100, 100, 1000, 1000);
+        MAX_ITER = iter;
+        width = 1000;
+        height = 1000;
         //setResizable(false);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
-        I = new BufferedImage(getWidth(), getHeight(), BufferedImage.TYPE_INT_RGB);
+        I = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+
+        long time0 = System.currentTimeMillis();
         MandelbrotRunner[] threads = new MandelbrotRunner[threadCount];
 
         for(int i = 0; i < threadCount; i++){
@@ -36,9 +43,12 @@ public class Mandelbrot extends JFrame {
                 threads[i].join();
         }
         Graphics2D g2d = I.createGraphics();
-        printAll(g2d);
-        g2d.dispose();
-        ImageIO.write(I, "png", new File("filename.png"));
+        //printAll(g2d);
+        //g2d.dispose();
+        ImageIO.write(I, "png", new File("output.png"));
+        long time1 = System.currentTimeMillis();
+        double dtime = (time1-time0)/1000.;
+        System.out.println("Task finished in " + dtime + " seconds");
     }
 
 

@@ -18,8 +18,8 @@ public class MandelbrotRunner extends Thread{
         this.mb = mandelBrot;
         this.threadCount = mb.getThreadCount();
         this.thread = thisThread;
-        width = mb.getWidth();
-        height = mb.getHeight();
+        width = mb.width;
+        height = mb.height;
         ZOOM = mb.getZoom();
         MAX_ITER = mb.getMAX_ITER();
         thread++;
