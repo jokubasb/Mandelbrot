@@ -3,6 +3,7 @@ package com.parallel;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.Vector;
 import javax.imageio.ImageIO;
 import javax.swing.JFrame;
@@ -31,6 +32,8 @@ public class Mandelbrot {
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
+        ArrayList<Integer> chunk = new ArrayList<Integer>();
+
         long time0 = System.currentTimeMillis();
         MandelbrotRunner[] threads = new MandelbrotRunner[threadCount];
 
@@ -42,7 +45,7 @@ public class Mandelbrot {
             while (!threads[i].finished)
                 threads[i].join();
         }
-        Graphics2D g2d = I.createGraphics();
+        //Graphics2D g2d = I.createGraphics();
         //printAll(g2d);
         //g2d.dispose();
         ImageIO.write(I, "png", new File("output.png"));
