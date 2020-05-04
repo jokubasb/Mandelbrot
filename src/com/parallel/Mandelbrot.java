@@ -32,7 +32,18 @@ public class Mandelbrot {
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 
-        ArrayList<Integer> chunk = new ArrayList<Integer>();
+        
+        /*
+        boolean finished = false;
+        int left = 100;
+        int[] c = splitIntoParts(width, 100);
+        ArrayList<Integer> chunks = new ArrayList<Integer>();
+        int begin = 0;
+        for(int i : c){
+            chunks.add(begin);
+            begin += i;
+        }
+        */
 
         long time0 = System.currentTimeMillis();
         MandelbrotRunner[] threads = new MandelbrotRunner[threadCount];
@@ -41,10 +52,14 @@ public class Mandelbrot {
             (threads[i] = new MandelbrotRunner(i, this)).start();
         }
 
+
+        
         for(int i = 0; i < threadCount; i++) {
-            while (!threads[i].finished)
+            while (!threads[i].finished){
                 threads[i].join();
+            }
         }
+
         //Graphics2D g2d = I.createGraphics();
         //printAll(g2d);
         //g2d.dispose();

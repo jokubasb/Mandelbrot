@@ -1,7 +1,10 @@
 package com.parallel;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Vector;
+
+//import sun.awt.image.XbmImageDecoder;
 
 public class MandelbrotRunner extends Thread{
     public int thread;
@@ -13,6 +16,11 @@ public class MandelbrotRunner extends Thread{
     int height;
     Mandelbrot mb;
     double zx, zy, cX, cY, tmp;
+    //ArrayList<Integer> chunk = new ArrayList<Integer>();
+    //int[] chunkSize;
+    //int yBegin = 0;
+    //int yEnd = 0;
+    
 
     public MandelbrotRunner(int thisThread, Mandelbrot mandelBrot){
         this.mb = mandelBrot;
@@ -23,15 +31,19 @@ public class MandelbrotRunner extends Thread{
         ZOOM = mb.getZoom();
         MAX_ITER = mb.getMAX_ITER();
         thread++;
+        //this.yBegin = begin;
+        //this.yEnd = end;
     }
     public void run(){
         int xBegin = 0;
-        int xEnd = 0;
+        int xEnd = width;
         int yBegin = 0;
-        int yEnd = height;
+        int yEnd = 0;
 
-        xEnd = (width / threadCount) * thread;
-        xBegin = xEnd - width / threadCount;
+        
+
+        yEnd = (height / threadCount) * thread;
+        yBegin = yEnd - height / threadCount;
 
         //System.out.println(thread + "," + begin + "," + end);
 
