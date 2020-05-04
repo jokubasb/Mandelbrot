@@ -64,7 +64,7 @@ public class MandelbrotRunner extends Thread{
                 //I.setRGB(x, y, iter | (iter << 8));
             }
         }
-        System.out.println("Thread " + thread + " finished");
+        //System.out.println("Thread " + thread + " finished");
         this.finished = true;
     }
 

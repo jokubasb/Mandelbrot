@@ -21,13 +21,13 @@ public class Mandelbrot {
     int threadCount;
 
 
-    public Mandelbrot(int threadCount, int iter) throws Exception{
+    public Mandelbrot(int threadCount, int iter, int resolution) throws Exception{
         //super("Mandelbrot Set");
         this.threadCount = threadCount;
         //setBounds(100, 100, 1000, 1000);
         MAX_ITER = iter;
-        width = 1000;
-        height = 1000;
+        width = resolution;
+        height = resolution;
         //setResizable(false);
         //setDefaultCloseOperation(EXIT_ON_CLOSE);
         I = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
